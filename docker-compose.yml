@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  eltwittodeldiablo:
+    build:
+      context: .
+    container_name: eltwittodeldiablo-api
+    command: bash -c "python main.py"
+    ports:
+      - "5000:5000"
+    environment:
+      CONSUMER_KEY: 'vqDjK7o3YMaVVva2vSoTSjvk2'
+      CONSUMER_SECRET: 'TZtHrq2KDSEA1EmaTpQTWQOBdPM7HT3CdQfqozcKhZbeDwDl0L'
+      ACCESS_TOKEN: ''
+      ACCESS_TOKEN_SECRET: ''
+      DATABASE_URL: ''
+    volumes:
+      - .:/usr/src
