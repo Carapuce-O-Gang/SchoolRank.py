@@ -4,15 +4,26 @@ services:
   eltwittodeldiablo:
     build:
       context: .
+      dockerfile: Dockerfile
     container_name: eltwittodeldiablo-api
     command: bash -c "python main.py"
     ports:
-      - "5000:5000"
+      - 8000:8000
     environment:
-      CONSUMER_KEY: 'vqDjK7o3YMaVVva2vSoTSjvk2'
-      CONSUMER_SECRET: 'TZtHrq2KDSEA1EmaTpQTWQOBdPM7HT3CdQfqozcKhZbeDwDl0L'
+      CONSUMER_KEY: vqDjK7o3YMaVVva2vSoTSjvk2
+      CONSUMER_SECRET: TZtHrq2KDSEA1EmaTpQTWQOBdPM7HT3CdQfqozcKhZbeDwDl0L
       ACCESS_TOKEN: ''
       ACCESS_TOKEN_SECRET: ''
-      DATABASE_URL: ''
+      DATABASE_URL: 'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clcumupyd04kp01ukcw814u6o/master'
     volumes:
       - .:/usr/src
+
+  eltwittodeldiablo-grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - eltwittodeldiablo
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - ./data:/etc/grafana/provisioning/datasources

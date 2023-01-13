@@ -1,6 +1,6 @@
 # ElTwittoDelDiablo v1.0
 
-![ElTwittoDelDiablo-logo](docs/pics/logo.png)
+![ElTwittoDelDiablo-logo](docs/pics/product-logo.png)
 
 A bot that searches for exotic emoticons on the twitter platform
 
