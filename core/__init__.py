@@ -33,7 +33,7 @@ def splash(info): # Splash Screen
 		" {}_____ _ _____          _ _   _        ____       _ ____  _       _     _{}".format(Colors.yellow, Colors.end),
 		"{}| ____| |_   _|_      _(_) |_| |_ ___ |  _ \  ___| |  _ \(_) __ _| |__ | | ___{}".format(Colors.yellow, Colors.end),
 		"{}|  _| | | | | \ \ /\ / / | __| __/ _ \| | | |/ _ \ | | | | |/ _` | '_ \| |/ _ \{}".format(Colors.yellow, Colors.end),
-		"{}| |___| | | |  \ V  V /| | |_| || (_) | |_| |  __/ | |_| | | (_| | |_) | | (_) |{} {}{}".format(Colors.yellow, Colors.red, info["version"], Colors.end),
+		"{}| |___| | | |  \ V  V /| | |_| || (_) | |_| |  __/ | |_| | | (_| | |_) | | (_) |\t{} {}{}".format(Colors.yellow, Colors.red, info["version"], Colors.end),
 		"{}|_____|_| |_|   \_/\_/ |_|\__|\__\___/|____/ \___|_|____/|_|\__,_|_.__/|_|\___/\t{} by {}{}\n".format(Colors.yellow, Colors.purple, info["author"], Colors.end)
 	]:
 		print(row)
