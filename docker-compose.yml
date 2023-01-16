@@ -6,7 +6,7 @@ services:
       context: ./src
       dockerfile: Dockerfile
     container_name: eltwittodeldiablo-api
-    command: bash -c "python main.py"
+    command: bash -c "python main.py -cC -cD"
     ports:
       - 5000:5000
     environment:

@@ -30,6 +30,15 @@ def arg(info) -> None:
 		)
 	}
 
+	commands = [Api, Datasource]
+
+	print(argv[1:len(argv)])
+
+	for i in argv[1:len(argv)]:
+		for j in range(0, len(args["prefix"][0:-2])):
+			if(arg in args["prefix"][j][0]):
+				commands[j]()
+
 	if(argv[1] in args["prefix"][-2][0]):
 		print(" {} {} par {}".format(info["name"], info["version"], info["author"]))
 		print(" Launch: python main.py <arg>\n")
