@@ -1,27 +1,28 @@
 version: '3.7'
 
 services:
-  eltwittodeldiablo:
+  eltwittodeldiablo-api:
     build:
-      context: .
+      context: ./src
       dockerfile: Dockerfile
     container_name: eltwittodeldiablo-api
     command: bash -c "python main.py"
     ports:
-      - 8000:8000
+      - 5000:5000
     environment:
-      CONSUMER_KEY: vqDjK7o3YMaVVva2vSoTSjvk2
-      CONSUMER_SECRET: TZtHrq2KDSEA1EmaTpQTWQOBdPM7HT3CdQfqozcKhZbeDwDl0L
-      ACCESS_TOKEN: ''
-      ACCESS_TOKEN_SECRET: ''
+      CONSUMER_KEY: EVnnUvkG8DBsPciANvuvryrzI
+      CONSUMER_SECRET: joYrOxYJhpYnqoaMpVfw4bN0kxogTOMqsIwHvD8d6by3dwnTEY
+      BEARER_TOKEN: AAAAAAAAAAAAAAAAAAAAAOzIlAEAAAAAKGJlXLODQ7lErsfUj9YXHsw7byE%3Dbgny4M2I4UEJq2pJLelpMxkEmuJJuGYaJMGMjPdMU87nwnNvQL
+      ACCESS_TOKEN: 1613590090936193024-L4SdjNWcLUwHOUm8FKoBXwyrl1BdTL
+      ACCESS_TOKEN_SECRET: 2nyrAFZlA8qjQFqb6yYJHNVq7QHwXJii0em9FuG221TiD
       DATABASE_URL: 'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clcumupyd04kp01ukcw814u6o/master'
     volumes:
-      - .:/usr/src
+      - ./src:/usr/src
 
   eltwittodeldiablo-grafana:
     image: grafana/grafana:latest
     depends_on:
-      - eltwittodeldiablo
+      - eltwittodeldiablo-api
     ports:
       - 3000:3000
     restart: unless-stopped
