@@ -6,8 +6,8 @@ from core.models import *
 
 class Datasource:
 
-	__client = None
-	__transport = None
+	__client: Client = None
+	__transport: RequestsHTTPTransport = None
 
 	def __init__(self) -> None:
 		self.connect()
@@ -15,10 +15,10 @@ class Datasource:
 		print(self.__client)
 
 	def connect(self) -> bool:
-		self.__transport = RequestsHTTPTransport(url=environ['DATABASE_URL'])
+		self.__transport = RequestsHTTPTransport(url = environ['DATABASE_URL'])
 		self.__client = Client(
-			transport=self.__transport,
-			fetch_schema_from_transport=True
+			transport = self.__transport,
+			fetch_schema_from_transport = True
 		)
 
 		return True
