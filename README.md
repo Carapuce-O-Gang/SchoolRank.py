@@ -1,6 +1,6 @@
-# ElTwittoDelDiablo v1.0
+# SchoolRank.py v1.0
 
-![ElTwittoDelDiablo-logo](docs/pics/product-logo.png)
+![SchoolRank-logo](docs/pics/product-logo.jpg)
 
 A bot that searches for exotic emoticons on the twitter platform
 
@@ -42,8 +42,10 @@ Install all dependencies with `~$ pip install -r requirements.txt`.
 
 ## Grafana
 
-Type `localhost:3000` on your browser to access to grafana interface and manage this, the login access is `admin:admin` & the **dashboard name is ElTwittoDelDiablo** in general.
+Type `localhost:3000` on your browser to access to grafana interface and manage this, the login access is `admin:admin` & the **dashboard name is School Rank** in general.
 
 [Summary](#summary)
 
 ## GraphQL Database
+
+The database is hosted by [Hygraph](https://app.hygraph.com/) on cloud

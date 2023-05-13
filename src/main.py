@@ -10,34 +10,32 @@ if(version_info.major < 3):
 
 # Importation des dépendances
 from core import splash
-from core.api import Api
 from core.datasource import Datasource
 from time import sleep
 
 def arg(info) -> None:
 	args = {
 		"prefix": (
-			(("-cC", "--check-connection"), ""),
 			(("-cD", "--check-datasource"), ""),
 			(("-h", "--help"), ""),
 			(("-v", "--version"), "")
 		),
 		"descriptions": (
-			"Check twitter api connection",
+			"Check education.gouv api connection",
 			"Check database connection",
 			"\t\tDisplays the help menu",
 			"\t\tDisplays the version of the program\n"
 		)
 	}
 
-	commands = [Api, Datasource]
-
-	print(argv[1:len(argv)])
+	cmds = [
+		Datasource
+	]
 
 	for i in argv[1:len(argv)]:
 		for j in range(0, len(args["prefix"][0:-2])):
-			if(arg in args["prefix"][j][0]):
-				commands[j]()
+			if(i in args["prefix"][j][0]):
+				cmds[j]()
 
 	if(argv[1] in args["prefix"][-2][0]):
 		print(" {} {} par {}".format(info["name"], info["version"], info["author"]))
@@ -53,12 +51,11 @@ def arg(info) -> None:
 def main(info) -> None:
 	splash(info)
 
-	data = Datasource()
-	api = Api()
+	Datasource()
 
 if(__name__ == "__main__"):
 	info = {
-		"name": "ElTwittoDelDiablo",
+		"name": "School Rank",
 		"version": "1.0",
 		"author": "Carapuce O Gang"
 	}
