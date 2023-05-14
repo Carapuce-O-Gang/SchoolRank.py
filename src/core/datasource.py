@@ -11,12 +11,42 @@ class Datasource:
 	__transport: RequestsHTTPTransport = None
 
 	def __init__(self) -> None:
-		self.connect()
-		self.check_connection()
+		self._connect()
+		self._check_connection()
 
-	def check_connection(self) -> bool:
-		query = query = gql("""query {
+	def _connect(self) -> None:
+		self.__transport = RequestsHTTPTransport(
+			url = environ['DATABASE_URL'],
+			headers = {
+				"Authorization": f"Bearer {environ['DATABASE_TOKEN']}"
+			}
+		)
+
+		self.__client = Client(
+			transport = self.__transport,
+			fetch_schema_from_transport = True
+		)
+
+	def _check_connection(self) -> bool:
+		query = gql("""query {
 			school(where: { id: "" }) {
+				id
+				name
+			}
+		}""")
+
+		try:
+			response = self.__client.execute(query)
+			print(f"[OK]: Connexion with hygraph is etablished")
+			return True
+
+		except Exception as err:
+			print(f"[ERR]: {err}")
+			return False
+	
+	def get_schools(self) -> dict:
+		query = gql("""query {
+			schools {
 				id
 				name
 				type
@@ -34,24 +64,26 @@ class Datasource:
 			}
 		}""")
 
-		try:
-			response = self.__client.execute(query)
-			print(f"[OK]: Connexion with hygraph is etablished")
-			return True
+		return self.__client.execute(query)
 
-		except Exception as err:
-			print(f"[ERR]: {err}")
-			return False
-
-	def connect(self) -> None:
-		self.__transport = RequestsHTTPTransport(
-			url = environ['DATABASE_URL'],
-			headers = {
-				"Authorization": f"Bearer {environ['DATABASE_TOKEN']}"
+	def get_school(self, id: str) -> dict:
+		query = gql("""query {
+			school(where: { id: "%s" }) {
+				id
+				name
+				type
+				sector
+				zip
+				department
+				academy
+				city
+				uai
+				insee
+				promotion
+				ips
+				ipsGt
+				ipsPro
 			}
-		)
+		}""" % id)
 
-		self.__client = Client(
-			transport = self.__transport,
-			fetch_schema_from_transport = True
-		)
+		print(self.__client.execute(query))

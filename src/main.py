@@ -51,7 +51,9 @@ def arg(info) -> None:
 def main(info) -> None:
 	splash(info)
 
-	Datasource()
+	db = Datasource()
+	# print(db.get_schools())
+	print(db.get_school("cc"))
 
 if(__name__ == "__main__"):
 	info = {
