@@ -1,2 +1,3 @@
-requests_toolbelt
 gql
+requests
+requests_toolbelt
