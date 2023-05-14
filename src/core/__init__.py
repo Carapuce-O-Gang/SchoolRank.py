@@ -1,4 +1,3 @@
-from os import system as prompt
 from platform import system
 from time import sleep
 
@@ -28,7 +27,6 @@ class Icons: # Module d'icône ascii
 	play = str(f" {Colors.bold}{Colors.green}(>){Colors.end} - ")
 
 def splash(info): # Splash Screen
-	prompt('clear' if(system() == "Linux") else 'cls')
 	for row in [
 		"  {}_____      _                 _   _____             _{}".format(Colors.yellow, Colors.end),
 		" {}/ ____|    | |               | | |  __ \           | |{}".format(Colors.yellow, Colors.end),

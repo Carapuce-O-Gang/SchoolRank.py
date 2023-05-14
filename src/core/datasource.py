@@ -1,3 +1,4 @@
+import json
 from os import environ
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
@@ -11,8 +12,10 @@ class Datasource:
 
 	def __init__(self) -> None:
 		self.connect()
+		self.check_connection()
 
-		query = gql("""query {
+	def check_connection(self) -> bool:
+		query = query = gql("""query {
 			schools {
 				name
 				type
@@ -30,9 +33,16 @@ class Datasource:
 			}
 		}""")
 
-		print(self.__client.execute(query))
+		try:
+			response = self.__client.execute(query)
+			print(f"[OK]: Connexion with hygraph is etablished")
+			return True
 
-	def connect(self) -> bool:
+		except Exception as err:
+			print(f"[ERR]: {err}")
+			return False
+
+	def connect(self) -> None:
 		self.__transport = RequestsHTTPTransport(
 			url = environ['DATABASE_URL'],
 			headers = {
@@ -44,5 +54,3 @@ class Datasource:
 			transport = self.__transport,
 			fetch_schema_from_transport = True
 		)
-
-		return True
