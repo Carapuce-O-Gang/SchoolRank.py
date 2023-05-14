@@ -16,7 +16,8 @@ class Datasource:
 
 	def check_connection(self) -> bool:
 		query = query = gql("""query {
-			schools {
+			school(where: { id: "" }) {
+				id
 				name
 				type
 				sector
