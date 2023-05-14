@@ -12,10 +12,34 @@ class Datasource:
 	def __init__(self) -> None:
 		self.connect()
 
-		print(self.__client)
+		query = gql("""query {
+			schools {
+				name
+				type
+				sector
+				zip
+				department
+				academy
+				city
+				uai
+				insee
+				promotion
+				ips
+				ipsGt
+				ipsPro
+			}
+		}""")
+
+		print(self.__client.execute(query))
 
 	def connect(self) -> bool:
-		self.__transport = RequestsHTTPTransport(url = environ['DATABASE_URL'])
+		self.__transport = RequestsHTTPTransport(
+			url = environ['DATABASE_URL'],
+			headers = {
+				"Authorization": f"Bearer {environ['DATABASE_TOKEN']}"
+			}
+		)
+
 		self.__client = Client(
 			transport = self.__transport,
 			fetch_schema_from_transport = True
