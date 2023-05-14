@@ -15,10 +15,18 @@ class Datasource:
 		print(self.__client)
 
 	def connect(self) -> bool:
-		self.__transport = RequestsHTTPTransport(url=environ['DATABASE_URL'])
+		self.__transport = RequestsHTTPTransport(
+			url=environ['DATABASE_URL'],
+			headers={
+				'Authorization': environ['DATABASE_TOKEN']
+			}
+		)
 		self.__client = Client(
 			transport=self.__transport,
 			fetch_schema_from_transport=True
 		)
 
 		return True
+	
+	def get_client(self) -> dict:
+		return self.__client

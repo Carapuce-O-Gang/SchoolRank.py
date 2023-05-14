@@ -11,6 +11,7 @@ if(version_info.major < 3):
 # Importation des dépendances
 from core import splash
 from core.datasource import Datasource
+from core.gouvservice import GouvService
 from time import sleep
 
 def arg(info) -> None:
@@ -51,7 +52,7 @@ def arg(info) -> None:
 def main(info) -> None:
 	splash(info)
 
-	Datasource()
+	GouvService().populate()
 
 if(__name__ == "__main__"):
 	info = {
