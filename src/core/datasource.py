@@ -1,9 +1,6 @@
-import json
 from os import environ
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
-
-from core.models import *
 
 class Datasource:
 
@@ -12,7 +9,7 @@ class Datasource:
 
 	def __init__(self) -> None:
 		self._connect()
-		self._check_connection()
+		self._check()
 
 	def _connect(self) -> None:
 		self.__transport = RequestsHTTPTransport(
@@ -27,7 +24,7 @@ class Datasource:
 			fetch_schema_from_transport = True
 		)
 
-	def _check_connection(self) -> bool:
+	def _check(self) -> bool:
 		query = gql("""query {
 			school(where: { id: "" }) {
 				id
@@ -64,7 +61,7 @@ class Datasource:
 			}
 		}""")
 
-		return self.__client.execute(query)
+		return self.__client.execute(query)['schools']
 
 	def get_school(self, id: str) -> dict:
 		query = gql("""query {
@@ -86,4 +83,4 @@ class Datasource:
 			}
 		}""" % id)
 
-		print(self.__client.execute(query))
+		return self.__client.execute(query)['school']

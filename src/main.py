@@ -11,11 +11,13 @@ if(version_info.major < 3):
 # Importation des dépendances
 from core import splash
 from core.datasource import Datasource
+from core.api import Api
 from time import sleep
 
 def arg(info) -> None:
 	args = {
 		"prefix": (
+			(("-cA", "--check-api"), ""),
 			(("-cD", "--check-datasource"), ""),
 			(("-h", "--help"), ""),
 			(("-v", "--version"), "")
@@ -29,6 +31,7 @@ def arg(info) -> None:
 	}
 
 	cmds = [
+		Api,
 		Datasource
 	]
 
@@ -52,8 +55,7 @@ def main(info) -> None:
 	splash(info)
 
 	db = Datasource()
-	# print(db.get_schools())
-	print(db.get_school("cc"))
+	api = Api()
 
 if(__name__ == "__main__"):
 	info = {

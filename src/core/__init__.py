@@ -31,8 +31,8 @@ def splash(info): # Splash Screen
 		"  {}_____      _                 _   _____             _{}".format(Colors.yellow, Colors.end),
 		" {}/ ____|    | |               | | |  __ \           | |{}".format(Colors.yellow, Colors.end),
 		"{}| (___   ___| |__   ___   ___ | | | |__) |__ _ _ __ | | __{}".format(Colors.yellow, Colors.end),
-		" {}\___ \ / __| '_ \ / _ \ / _ \| | |  _  // _` | '_ \| |/ /\t{} {}{}".format(Colors.yellow, Colors.red, info["version"], Colors.end),
-		" {}____) | (__| | | | (_) | (_) | | | | \ \ (_| | | | |   <\t{} by {}{}".format(Colors.yellow, Colors.purple, info["author"], Colors.end),
+		" {}\___ \ / __| '_ \ / _ \ / _ \| | |  _  // _` | '_ \| |/ /{}  {}{}".format(Colors.yellow, Colors.red, info["version"], Colors.end),
+		" {}____) | (__| | | | (_) | (_) | | | | \ \ (_| | | | |   <{}   by {}{}".format(Colors.yellow, Colors.purple, info["author"], Colors.end),
 		"{}|_____/ \___|_| |_|\___/ \___/|_| |_|  \_\__,_|_| |_|_|\_\{}\n".format(Colors.yellow, Colors.end)
 	]:
 		print(row)
