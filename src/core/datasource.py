@@ -40,7 +40,7 @@ class Datasource:
 		except Exception as err:
 			print(f"[ERR]: {err}")
 			return False
-	
+
 	def get_schools(self) -> dict:
 		query = gql("""query {
 			schools {
@@ -55,6 +55,8 @@ class Datasource:
 				uai
 				insee
 				promotion
+				latitude
+				longitude
 				ips
 				ipsGt
 				ipsPro
@@ -77,6 +79,8 @@ class Datasource:
 				uai
 				insee
 				promotion
+				latitude
+				longitude
 				ips
 				ipsGt
 				ipsPro
