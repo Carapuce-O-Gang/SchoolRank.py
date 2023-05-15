@@ -57,9 +57,11 @@ def arg(info) -> None:
 def main(info) -> None:
 	splash(info)
 
-	db = Datasource()
 	api = Api()
-	geo = Geolocation()
+	db = Datasource()
+
+	records = api.get_records()
+	db.create_schools(records)
 
 if(__name__ == "__main__"):
 	info = {

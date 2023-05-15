@@ -12,7 +12,7 @@ services:
       context: ./src
       dockerfile: Dockerfile
     container_name: schoolrank-api
-    command: bash -c "python main.py -cG"
+    command: bash -c "python main.py"
     env_file: .env
     networks:
       - private
