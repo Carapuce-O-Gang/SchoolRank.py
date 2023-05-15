@@ -88,3 +88,35 @@ class Datasource:
 		}""" % id)
 
 		return self.__client.execute(query)['school']
+
+	def insert_school(
+			self,
+			name: str, type: str, sector: str, zip: str, departement: str, academy: str, city: str, uai: str, insee: int, promotion: str,
+			latitude: float, longitude: float,
+			ips: float, ipsGt: float, ipsPro: float
+		) -> dict:
+		mutation = gql("""mutation {
+			createSchool(
+				data: {
+					name: "%s",
+					type: "%s",
+					sector: "%s",
+					zip: "%s",
+					department: "%s",
+					academy: "%s",
+					city: "%s",
+					uai: "%s",
+					insee: %i,
+					promotion: "%s",
+					latitude: %f,
+					longitude: %f,
+					ips: %f,
+					ipsGt: %f,
+					ipsPro: %f
+				}
+			) {
+				id
+			}
+		}""" % name, type, sector, zip, departement, academy, city, uai, insee, promotion, latitude, longitude, ips, ipsGt, ipsPro)
+
+		return self.__client.execute(mutation)

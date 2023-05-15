@@ -10,8 +10,9 @@ if(version_info.major < 3):
 
 # Importation des dépendances
 from core import splash
-from core.datasource import Datasource
 from core.api import Api
+from core.datasource import Datasource
+from core.geolocation import Geolocation
 from time import sleep
 
 def arg(info) -> None:
@@ -19,6 +20,7 @@ def arg(info) -> None:
 		"prefix": (
 			(("-cA", "--check-api"), ""),
 			(("-cD", "--check-datasource"), ""),
+			(("-cG", "--check-geolocation"), ""),
 			(("-h", "--help"), ""),
 			(("-v", "--version"), "")
 		),
@@ -32,7 +34,8 @@ def arg(info) -> None:
 
 	cmds = [
 		Api,
-		Datasource
+		Datasource,
+		Geolocation
 	]
 
 	for i in argv[1:len(argv)]:
@@ -56,6 +59,7 @@ def main(info) -> None:
 
 	db = Datasource()
 	api = Api()
+	geo = Geolocation()
 
 if(__name__ == "__main__"):
 	info = {
