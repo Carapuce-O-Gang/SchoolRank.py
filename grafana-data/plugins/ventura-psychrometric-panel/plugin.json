@@ -1,0 +1,61 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "Psychart",
+  "id": "ventura-psychrometric-panel",
+  "info": {
+    "description": "View air conditions on a psychrometric chart.",
+    "author": {
+      "name": "Nicolas Ventura",
+      "url": "https://www.nersc.gov/about/nersc-staff/building-infrastructure-group/nicolas-ventura/",
+      "email": "ventura@lbl.gov"
+    },
+    "keywords": [
+      "air",
+      "temperature",
+      "humidity",
+      "hvac",
+      "psychrometric",
+      "psychrometry",
+      "psychart"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://psychart.nicfv.com/"
+      },
+      {
+        "name": "Download",
+        "url": "https://grafana.com/grafana/plugins/ventura-psychrometric-panel/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://grafana.com/blog/2022/10/14/how-to-monitor-high-performance-computing-system-health-with-grafana-and-psychrometric-charts/"
+      },
+      {
+        "name": "GitHub",
+        "url": "https://github.com/nicfv/Psychart"
+      },
+      {
+        "name": "License",
+        "url": "https://raw.githubusercontent.com/nicfv/Psychart/main/LICENSE"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Logo - See screenshots in README.md",
+        "path": "img/logo.svg"
+      }
+    ],
+    "version": "3.1.3",
+    "updated": "2023-05-12"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=9.3.8",
+    "plugins": []
+  }
+}
