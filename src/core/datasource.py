@@ -3,6 +3,8 @@ from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 from time import sleep
 
+from core.geolocation import Geolocation
+
 class Datasource:
 
 	__client: Client = None
@@ -91,55 +93,58 @@ class Datasource:
 		return self.__client.execute(query)['school']
 	
 	def create_school(self, create_school_record) -> str:
+		geo = Geolocation()
+		geoloc = geo.getGeoloc(create_school_record.get('fields', {}).get('code_insee_de_la_commune', 0))
+
 		school = """
-            createSchool(data: {
-                name: "%s"
-                sector: "%s"
-                type: "%s"
-                department: "%s"
-                academy: "%s"
-                city: "%s"
-                uai: "%s"
-                insee: %d
-                promotion: "%s"
-                zip: "%s"
-				latitude: %f
-				longitude: %f
-        """ % (
-            create_school_record.get('fields', {}).get('nom_de_l_etablissment'),
-            create_school_record.get('fields', {}).get('secteur'),
-            create_school_record.get('fields', {}).get('type_de_lycee'),
-            create_school_record.get('fields', {}).get('departement'),
-            create_school_record.get('fields', {}).get('academie'),
-            create_school_record.get('fields', {}).get('nom_de_la_commune'),
-            create_school_record.get('fields', {}).get('uai'),
-            int(create_school_record.get('fields', {}).get('code_insee_de_la_commune', 0)),
-            create_school_record.get('fields', {}).get('rentree_scolaire'),
-            create_school_record.get('fields', {}).get('code_du_departement'),
-	    	0,
-		    0
-        )
+						createSchool(data: {
+								name: "%s"
+								sector: "%s"
+								type: "%s"
+								department: "%s"
+								academy: "%s"
+								city: "%s"
+								longitude: %f
+								latitude: %f
+								uai: "%s"
+								insee: %d
+								promotion: "%s"
+								zip: "%s"
+				""" % (
+						create_school_record.get('fields', {}).get('nom_de_l_etablissment'),
+						create_school_record.get('fields', {}).get('secteur'),
+						create_school_record.get('fields', {}).get('type_de_lycee'),
+						create_school_record.get('fields', {}).get('departement'),
+						create_school_record.get('fields', {}).get('academie'),
+						create_school_record.get('fields', {}).get('nom_de_la_commune'),
+						float(geoloc['longitude']),
+						float(geoloc['latitude']),
+						create_school_record.get('fields', {}).get('uai'),
+						int(create_school_record.get('fields', {}).get('code_insee_de_la_commune', 0)),
+						create_school_record.get('fields', {}).get('rentree_scolaire'),
+						create_school_record.get('fields', {}).get('code_du_departement')
+				)
 
 		if 'ips_ensemble_gt_pro' in create_school_record['fields']:
-			school += 'ips: %d\n' % (int(create_school_record['fields']['ips_ensemble_gt_pro']))
+			school += 'ips: %f\n' % (float(create_school_record['fields']['ips_ensemble_gt_pro']))
 
 		if 'ips_voie_gt' in create_school_record['fields']:
-			school += 'ipsGt: %d\n' % (int(create_school_record['fields']['ips_voie_gt']))
+			school += 'ipsGt: %f\n' % (float(create_school_record['fields']['ips_voie_gt']))
 		
 		if 'ips_voie_pro' in create_school_record['fields']:
-			school += 'ipsPro: %d\n' % (int(create_school_record['fields']['ips_voie_pro']))
+			school += 'ipsPro: %f\n' % (float(create_school_record['fields']['ips_voie_pro']))
 
 		school += """})  {
-                name
-                sector
-                type
-                department
-                academy
-                city
-                uai
-                insee
-                promotion
-                zip
+								name
+								sector
+								type
+								department
+								academy
+								city
+								uai
+								insee
+								promotion
+								zip
 		"""
 
 		if 'ips_ensemble_gt_pro' in create_school_record['fields']:
