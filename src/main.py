@@ -60,8 +60,8 @@ def main(info) -> None:
 	api = Api()
 	db = Datasource()
 
-	records = api.get_records()
-	db.create_schools(records)
+	# records = api.get_records()
+	# db.create_schools(records)
 
 if(__name__ == "__main__"):
 	info = {
